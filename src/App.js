@@ -1,13 +1,18 @@
 import React from 'react';
-import { Row } from 'antd';
-import './App.scss';
+import { Route, Routes } from 'react-router';
 import Exchanges from './features/exchanges/Exchanges';
+import Exchange from './features/exchange/Exchange';
+import './App.scss';
+import NoMatch from './features/noMatch/NoMatch';
 
 function App() {
   return (
-    <Row>
-      <Exchanges />
-    </Row>
+    <Routes>
+      <Route path="/" element={<Exchanges />} />
+      <Route path="exchange/:exchange" element={<Exchange />} />
+      <Route path="*" element={<NoMatch />}
+      />
+    </Routes>
   );
 }
 

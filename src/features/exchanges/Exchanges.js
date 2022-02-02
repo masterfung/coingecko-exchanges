@@ -1,15 +1,19 @@
-import { Col, Table } from "antd";
+import { Col, Table, Typography } from "antd";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExchangesAsync } from "./exchangesSlice";
 
+const { Title } = Typography;
+
 const Exchanges = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const exchanges = useSelector(state => state.exchanges.exchanges);
 
   useEffect(() => {
     dispatch(fetchExchangesAsync());
-  }, []);
+  }, [dispatch]);
   
   const columns = [
     {
@@ -32,7 +36,7 @@ const Exchanges = () => {
       title: 'Site',
       dataIndex: 'url',
       key: 'url',
-      render: (string) => <a href={string} target="_blank">Website</a>
+      render: (url) => <a rel="noreferrer" href={url} target="_blank">Visit Exchange</a>
     },
     {
       title: 'Trust Rank',
@@ -43,7 +47,19 @@ const Exchanges = () => {
 
   return (
     <Col span={20} offset={2}>
-      <Table dataSource={exchanges} columns={columns} rowKey="id" />
+      <Title>Exchanges</Title>
+      <Table 
+        dataSource={exchanges} 
+        columns={columns} 
+        onRow={(record) => {
+          return {
+            onClick: event => { 
+              console.log(record);
+              navigate(`/exchange/${record.id}`)
+            },
+          };
+        }}
+        rowKey="id" />
     </Col>
   )
 };

@@ -1,0 +1,13 @@
+.loading-container {
+  width: 300px;
+  text-align: center;
+  background-color: white;
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  color: black;
+
+  .spinner {
+    font-size: 30px;
+  }
+}

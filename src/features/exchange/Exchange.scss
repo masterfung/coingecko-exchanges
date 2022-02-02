@@ -1,0 +1,42 @@
+.exchange {
+  .exchange-header {
+    margin: 10px 0;
+  }
+  .exchange-container {
+    .section, .section-listing {
+      .ant-descriptions-item-container {
+        display: flex;
+        height: 100%;
+        align-items: center;
+  
+        .ant-descriptions-item-label {
+          font-size: 22px;
+        }
+  
+        .ant-descriptions-item-content {
+          font-size: 30px;
+        }
+      }
+    }
+  
+    .section-listing {
+      .ant-descriptions-item-container {
+        .ant-descriptions-item-content {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .description {
+      .ant-descriptions-item-container {
+        .ant-descriptions-item-label {
+          font-size: 22px;
+        }
+  
+        .ant-descriptions-item-content {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
