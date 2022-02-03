@@ -25,12 +25,12 @@ const checkFBFullLinkOrFill = (str) => {
   if (str.includes("facebook")) {
     return str;
   }
-  return `https://facebook.com/${str}`;
+  return !!str ? `https://facebook.com/${str}` : "";
 }
 
 // pad handles from twitter
 const checkTwitterFullLinkOrFill = (str) => {
-  return `https://twitter.com/${str}`;
+  return !!str ? `https://twitter.com/${str}` : "";
 }
 
 // helper functions to pad missing url params
@@ -38,7 +38,7 @@ const checkRedditFullLinkOrFill = (str) => {
   if (str.includes("reddit")) {
     return str;
   }
-  return `https://reddit.com${str}`;
+  return !!str ? `https://reddit.com${str}` : "";
 }
 
 // helper function to determine if data is usable for social icon creation
