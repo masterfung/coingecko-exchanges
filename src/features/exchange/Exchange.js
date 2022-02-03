@@ -2,14 +2,24 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Descriptions, Typography, Button} from "antd";
-import { fetchExchangeAsync, resetExchange } from "./exchangeSlice";
+import { 
+  fetchExchangeAsync, 
+  resetExchange, 
+  selectExchange, 
+  selectExchangeFetchStatus
+} from "./exchangeSlice";
 import { Link } from "react-router-dom";
-import { FacebookFilled, RedditSquareFilled, SlackSquareFilled } from "@ant-design/icons/lib/icons";
+import { 
+  FacebookFilled, 
+  RedditSquareFilled, 
+  SlackSquareFilled
+} from "@ant-design/icons/lib/icons";
 import Loading from "../loading/Loading";
 import "./Exchange.scss";
 
 const { Title} = Typography;
 
+// helper function to determine if data is usable for social icon creation
 const checkSocialDataOrNull = (data, icon) => {
   const Icon = icon;
   return data.length 
@@ -20,10 +30,10 @@ const checkSocialDataOrNull = (data, icon) => {
 const Exchange = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const exchangeData = useSelector(state => state.exchange.exchange);
-  const status = useSelector(state => state.exchange.status);
-  console.log(status, exchangeData);
+  const exchangeData = useSelector(selectExchange);
+  const status = useSelector(selectExchangeFetchStatus);
 
+  // added a unmounting and elements for updating
   useEffect(() => {
     dispatch(fetchExchangeAsync(params.exchange));
 
@@ -33,10 +43,10 @@ const Exchange = () => {
   }, [dispatch, params.exchange]);
 
   return (
-    status === 'idle' ? (
+    status === "idle" ? (
     <Row className="exchange">
-      <Col sm={20} span={20} offset={2}>
-        <Button>
+      <Col sm={10} span={20} offset={6}>
+        <Button className="button-home" type="primary">
           <Link to="/">Return Home</Link>
         </Button>
         <Descriptions title={

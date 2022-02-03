@@ -2,14 +2,15 @@ import { Col, Table, Typography } from "antd";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExchangesAsync } from "./exchangesSlice";
+import { fetchExchangesAsync, selectExchanges } from "./exchangesSlice";
+import "./Exchanges.scss";
 
 const { Title } = Typography;
 
 const Exchanges = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const exchanges = useSelector(state => state.exchanges.exchanges);
+  const exchanges = useSelector(selectExchanges);
 
   useEffect(() => {
     dispatch(fetchExchangesAsync());
@@ -17,31 +18,31 @@ const Exchanges = () => {
   
   const columns = [
     {
-      title: 'Logo',
-      dataIndex: 'image',
-      key: 'image',
+      title: "Logo",
+      dataIndex: "image",
+      key: "image",
       render: (src) => <img src={src} alt="exchange logo"></img>
     },
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: 'Country',
-      dataIndex: 'country',
-      key: 'country',
+      title: "Country",
+      dataIndex: "country",
+      key: "country",
     },
     {
-      title: 'Site',
-      dataIndex: 'url',
-      key: 'url',
+      title: "Site",
+      dataIndex: "url",
+      key: "url",
       render: (url) => <a rel="noreferrer" href={url} target="_blank">Visit Exchange</a>
     },
     {
-      title: 'Trust Rank',
-      dataIndex: 'trust_score_rank',
-      key: 'trust_score_rank',
+      title: "Trust Rank",
+      dataIndex: "trust_score_rank",
+      key: "trust_score_rank",
     },
   ];
 
@@ -53,8 +54,7 @@ const Exchanges = () => {
         columns={columns} 
         onRow={(record) => {
           return {
-            onClick: event => { 
-              console.log(record);
+            onClick: () => { 
               navigate(`/exchange/${record.id}`)
             },
           };

@@ -1,4 +1,7 @@
 .exchange {
+  .button-home {
+    margin: 10px 0;
+  }
   .exchange-header {
     margin: 10px 0;
   }
@@ -23,6 +26,8 @@
       .ant-descriptions-item-container {
         .ant-descriptions-item-content {
           font-size: 18px;
+          display: flex;
+          align-items: center;
         }
       }
     }

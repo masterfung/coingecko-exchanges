@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchExchanges } from './exchangesAPI';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchExchanges } from "./exchangesAPI";
 
 const initialState = {
   exchanges: null,
@@ -30,6 +30,6 @@ export const exchangesSlice = createSlice({
   }
 });
 
-// export const { updateState } = exchangesSlice.actions;
+export const selectExchanges = state => state.exchanges.exchanges;
 
 export default exchangesSlice.reducer;

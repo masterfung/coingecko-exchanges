@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchExchangeDetails } from './exchangeAPI';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchExchangeDetails } from "./exchangeAPI";
 
 const initialState = {
   exchange: null,
@@ -9,7 +9,6 @@ const initialState = {
 export const fetchExchangeAsync = createAsyncThunk(
   "exchange/fetchExchangeDetail",
   async(id) => {
-    console.log('ID', id);
     const response = await fetchExchangeDetails(id);
     return await response.json();
   }
@@ -37,5 +36,9 @@ export const exchangeSlice = createSlice({
 });
 
 export const { resetExchange } = exchangeSlice.actions;
+
+export const selectExchange = state => state.exchange.exchange;
+
+export const selectExchangeFetchStatus = state => state.exchange.status;
 
 export default exchangeSlice.reducer;
