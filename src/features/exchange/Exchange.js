@@ -12,12 +12,34 @@ import { Link } from "react-router-dom";
 import { 
   FacebookFilled, 
   RedditSquareFilled, 
-  SlackSquareFilled
+  SlackSquareFilled,
+  TwitterSquareFilled
 } from "@ant-design/icons/lib/icons";
 import Loading from "../loading/Loading";
 import "./Exchange.scss";
 
 const { Title} = Typography;
+
+// helper functions to pad missing url params
+const checkFBFullLinkOrFill = (str) => {
+  if (str.includes("facebook")) {
+    return str;
+  }
+  return `https://facebook.com/${str}`;
+}
+
+// pad handles from twitter
+const checkTwitterFullLinkOrFill = (str) => {
+  return `https://twitter.com/${str}`;
+}
+
+// helper functions to pad missing url params
+const checkRedditFullLinkOrFill = (str) => {
+  if (str.includes("reddit")) {
+    return str;
+  }
+  return `https://reddit.com${str}`;
+}
 
 // helper function to determine if data is usable for social icon creation
 const checkSocialDataOrNull = (data, icon) => {
@@ -32,6 +54,7 @@ const Exchange = () => {
   const params = useParams();
   const exchangeData = useSelector(selectExchange);
   const status = useSelector(selectExchangeFetchStatus);
+  console.log(exchangeData);
 
   // added a unmounting and elements for updating
   useEffect(() => {
@@ -45,7 +68,7 @@ const Exchange = () => {
   return (
     status === "idle" ? (
     <Row className="exchange">
-      <Col sm={10} span={20} offset={6}>
+      <Col span={20} offset={2}>
         <Button className="button-home" type="primary">
           <Link to="/">Return Home</Link>
         </Button>
@@ -58,8 +81,9 @@ const Exchange = () => {
           className="exchange-container"
           >
           <Descriptions.Item label="Social Links" className="section">
-            {checkSocialDataOrNull(exchangeData.facebook_url, FacebookFilled)}
-            {checkSocialDataOrNull(exchangeData.reddit_url, RedditSquareFilled)}
+            {checkSocialDataOrNull(checkFBFullLinkOrFill(exchangeData.facebook_url), FacebookFilled)}
+            {checkSocialDataOrNull(checkTwitterFullLinkOrFill(exchangeData.twitter_handle), TwitterSquareFilled)}
+            {checkSocialDataOrNull(checkRedditFullLinkOrFill(exchangeData.reddit_url), RedditSquareFilled)}
             {checkSocialDataOrNull(exchangeData.slack_url, SlackSquareFilled)}
           </Descriptions.Item>
           <Descriptions.Item label="Year Established" className="section-listing">
@@ -75,6 +99,9 @@ const Exchange = () => {
         <Descriptions className="exchange-container">
         <Descriptions.Item label="Description" className="description">
           {exchangeData.description.length ? exchangeData.description : "N/A"}
+        </Descriptions.Item>
+        <Descriptions.Item label="Total Volume (24hrs) BTC" className="description">
+          {exchangeData.trade_volume_24h_btc ? exchangeData.trade_volume_24h_btc.toFixed(4) : "N/A"}
         </Descriptions.Item>
         </Descriptions>
       </Col>

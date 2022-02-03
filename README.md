@@ -1,5 +1,9 @@
 # Coingecko Exchange
 
+This exchange pulls from the Coingecko v3 APIs to list exchanges (ranked by volume in 24 hours) and individual exchanges (when clicked). This application is deployed to [link](https://coingecko-redux.herokuapp.com/).
+
+This application leverages Create React App, Redux Toolkit, Redux, React Route v6, Ant Design, and Jest/Enzyme/React Testing. 
+
 ## Available Scripts
 
 In the project directory, you can run:
